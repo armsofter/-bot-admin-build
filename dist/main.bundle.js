@@ -296,7 +296,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ButtonsService = (function () {
     function ButtonsService(http) {
         this.http = http;
-        this.botUrl = 'http://13.250.127.118';
+        this.botUrl = 'http://13.250.127.118:3000';
     }
     ButtonsService.prototype.getAllButtons = function () {
         return this.http.get(this.botUrl + "/allButtons");
@@ -627,7 +627,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var MessagesService = (function () {
     function MessagesService(http) {
         this.http = http;
-        this.botUrl = 'http://13.250.127.118';
+        this.botUrl = 'http://13.250.127.118:3000';
     }
     MessagesService.prototype.getAllQuestions = function () {
         return this.http.get(this.botUrl + "/allMessages");
