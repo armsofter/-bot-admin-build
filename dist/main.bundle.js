@@ -91,12 +91,18 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__messages_service__ = __webpack_require__("../../../../../src/app/messages.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__buttons_service__ = __webpack_require__("../../../../../src/app/buttons.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__mass_mass_component__ = __webpack_require__("../../../../../src/app/mass/mass.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__auth_guard__ = __webpack_require__("../../../../../src/app/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__login_service__ = __webpack_require__("../../../../../src/app/login.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -121,7 +127,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_6__message_add_message_add_component__["a" /* MessageAddComponent */],
                 __WEBPACK_IMPORTED_MODULE_7__buttons_buttons_component__["a" /* ButtonsComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__buttons_add_buttons_add_component__["a" /* ButtonsAddComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__mass_mass_component__["a" /* MassComponent */]
+                __WEBPACK_IMPORTED_MODULE_12__mass_mass_component__["a" /* MassComponent */],
+                __WEBPACK_IMPORTED_MODULE_13__login_login_component__["a" /* LoginComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -129,7 +136,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["b" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */]
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_10__messages_service__["a" /* MessagesService */], __WEBPACK_IMPORTED_MODULE_11__buttons_service__["a" /* ButtonsService */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_10__messages_service__["a" /* MessagesService */], __WEBPACK_IMPORTED_MODULE_11__buttons_service__["a" /* ButtonsService */], __WEBPACK_IMPORTED_MODULE_15__login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_14__auth_guard__["a" /* AuthGuard */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
@@ -152,6 +159,10 @@ var AppModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messages_list_messages_list_component__ = __webpack_require__("../../../../../src/app/messages-list/messages-list.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__message_add_message_add_component__ = __webpack_require__("../../../../../src/app/message-add/message-add.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mass_mass_component__ = __webpack_require__("../../../../../src/app/mass/mass.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__auth_guard__ = __webpack_require__("../../../../../src/app/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+
+
 
 
 
@@ -159,15 +170,68 @@ var AppModule = (function () {
 
 
 var router = [
-    { path: '', component: __WEBPACK_IMPORTED_MODULE_3__messages_list_messages_list_component__["a" /* MessagesListComponent */] },
-    { path: 'messages-add', component: __WEBPACK_IMPORTED_MODULE_4__message_add_message_add_component__["a" /* MessageAddComponent */] },
-    { path: 'messages-update/:id', component: __WEBPACK_IMPORTED_MODULE_4__message_add_message_add_component__["a" /* MessageAddComponent */] },
-    { path: 'buttons', component: __WEBPACK_IMPORTED_MODULE_1__buttons_buttons_component__["a" /* ButtonsComponent */] },
-    { path: 'buttons-update/:id', component: __WEBPACK_IMPORTED_MODULE_2__buttons_add_buttons_add_component__["a" /* ButtonsAddComponent */] },
-    { path: 'buttons-add', component: __WEBPACK_IMPORTED_MODULE_2__buttons_add_buttons_add_component__["a" /* ButtonsAddComponent */] },
-    { path: 'mass', component: __WEBPACK_IMPORTED_MODULE_5__mass_mass_component__["a" /* MassComponent */] }
+    { path: '', component: __WEBPACK_IMPORTED_MODULE_3__messages_list_messages_list_component__["a" /* MessagesListComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_6__auth_guard__["a" /* AuthGuard */]] },
+    { path: 'messages-add', component: __WEBPACK_IMPORTED_MODULE_4__message_add_message_add_component__["a" /* MessageAddComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_6__auth_guard__["a" /* AuthGuard */]] },
+    { path: 'messages-update/:id', component: __WEBPACK_IMPORTED_MODULE_4__message_add_message_add_component__["a" /* MessageAddComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_6__auth_guard__["a" /* AuthGuard */]] },
+    { path: 'buttons', component: __WEBPACK_IMPORTED_MODULE_1__buttons_buttons_component__["a" /* ButtonsComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_6__auth_guard__["a" /* AuthGuard */]] },
+    { path: 'buttons-update/:id', component: __WEBPACK_IMPORTED_MODULE_2__buttons_add_buttons_add_component__["a" /* ButtonsAddComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_6__auth_guard__["a" /* AuthGuard */]] },
+    { path: 'buttons-add', component: __WEBPACK_IMPORTED_MODULE_2__buttons_add_buttons_add_component__["a" /* ButtonsAddComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_6__auth_guard__["a" /* AuthGuard */]] },
+    { path: 'mass', component: __WEBPACK_IMPORTED_MODULE_5__mass_mass_component__["a" /* MassComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_6__auth_guard__["a" /* AuthGuard */]] },
+    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_7__login_login_component__["a" /* LoginComponent */] }
 ];
 var routes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["c" /* RouterModule */].forRoot(router);
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/auth.guard.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthGuard; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_service__ = __webpack_require__("../../../../../src/app/login.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var AuthGuard = (function () {
+    function AuthGuard(router, route, loginService) {
+        this.router = router;
+        this.route = route;
+        this.loginService = loginService;
+    }
+    AuthGuard.prototype.canActivate = function (next, state) {
+        var _this = this;
+        this.loginService.validationToken().subscribe(function (res) {
+            if (!res.error) {
+                console.log(res);
+                return true;
+            }
+            else {
+                _this.router.navigate(['/login']);
+            }
+        });
+        return true;
+    };
+    AuthGuard = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */],
+            __WEBPACK_IMPORTED_MODULE_2__login_service__["a" /* LoginService */]])
+    ], AuthGuard);
+    return AuthGuard;
+}());
+
 
 
 /***/ }),
@@ -193,7 +257,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/buttons-add/buttons-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-mm-6 col-sm-push-3\">\n  <h2>Button# {{id}}</h2>\n  <div class=\"form-group\">\n    <h4>Buttons text</h4>\n    <input [(ngModel)]=\"button.message\" class=\"form-control\">\n  </div>\n\n  <div class=\"form-group\">\n    <div *ngFor=\"let b of button.buttons\" class=\"col-sm-12\"\n         style=\"margin: 5px; border: 1px solid #FFF; border-radius: 3px;\">\n      <h3>button#{{b.ID}}</h3>\n      <h4>Name</h4>\n      <input [(ngModel)]=\"b.name\">\n      <h4>next</h4>\n      <input [(ngModel)]=\"b.next\">\n      <div class=\"form-group\">\n        <h4>next question or buttons</h4>\n        <select [(ngModel)]=\"b.type\">\n          <option value=\"0\">question</option>\n          <option value=\"1\">button</option>\n        </select>\n      </div>\n    </div>\n    <button (click)=\"addButton()\">Add Button</button>\n  </div>\n\n\n  <button (click)=\"saveButton()\" class=\"btn btn-default\">Submit</button>\n  <button class=\"btn btn-default\" [routerLink]=\"['/']\">Cancel</button>\n</div>\n"
+module.exports = "<div class=\"col-sm-6 col-sm-push-3\">\n  <h2>Button# {{id}}</h2>\n  <div class=\"form-group\">\n    <h4>Buttons text</h4>\n    <input [(ngModel)]=\"button.message\" class=\"form-control\">\n  </div>\n\n  <div class=\"form-group\">\n    <h4>User profile input</h4>\n    <select [(ngModel)]=\"button.db_key\">\n      <option value=\"\"></option>\n      <option value=\"age\">Age</option>\n      <option value=\"nrc\">Nrc</option>\n      <option value=\"job\">Job</option>\n      <option value=\"noJob\">No Job</option>\n      <option value=\"nrc\">Nrc</option>\n      <option value=\"salary\">Salary</option>\n      <option value=\"hometown\">Hometown</option>\n      <option value=\"gender\">Gender</option>\n      <option value=\"location\">Location</option>\n      <option value=\"jobApply\">Job Apply</option>\n    </select>\n  </div>\n  <div class=\"form-group\">\n    <div *ngFor=\"let b of button.buttons\" class=\"col-sm-12\"\n         style=\"margin: 5px; border: 1px solid #FFF; border-radius: 3px;\">\n      <h3>button#{{b.ID}}</h3>\n      <h4>Name</h4>\n      <input [(ngModel)]=\"b.name\">\n      <h4>next</h4>\n      <input [(ngModel)]=\"b.next\">\n      <div class=\"form-group\">\n        <h4>next question or buttons</h4>\n        <select [(ngModel)]=\"b.type\">\n          <option value=\"0\">question</option>\n          <option value=\"1\">button</option>\n        </select>\n      </div>\n    </div>\n    <button (click)=\"addButton()\">Add Button</button>\n  </div>\n\n\n  <button (click)=\"saveButton()\" class=\"btn btn-default\">Submit</button>\n  <button class=\"btn btn-default\" [routerLink]=\"['/']\">Cancel</button>\n</div>\n"
 
 /***/ }),
 
@@ -223,7 +287,8 @@ var ButtonsAddComponent = (function () {
         this.route = route;
         this.button = {
             buttons: [],
-            message: ''
+            message: '',
+            db_key: ''
         };
         if (this.route.snapshot.params.id) {
             this.id = this.route.snapshot.params.id;
@@ -302,7 +367,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ButtonsService = (function () {
     function ButtonsService(http) {
         this.http = http;
-        this.botUrl = 'http://localhost:3000';
+        this.botUrl = 'https://bot.good.com.mm';
     }
     ButtonsService.prototype.getAllButtons = function () {
         return this.http.get(this.botUrl + "/allButtons");
@@ -385,6 +450,126 @@ var ButtonsComponent = (function () {
         __metadata("design:paramtypes", [])
     ], ButtonsComponent);
     return ButtonsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/login.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var LoginService = (function () {
+    function LoginService(http) {
+        this.http = http;
+        this.botUrl = 'https://bot.good.com.mm';
+    }
+    LoginService.prototype.login = function (data) {
+        return this.http.post(this.botUrl + "/login", data);
+    };
+    LoginService.prototype.validationToken = function () {
+        return this.http.post(this.botUrl + "/checkToken", { token: localStorage.getItem('token') });
+    };
+    LoginService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], LoginService);
+    return LoginService;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/login/login.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".login-area {\n  margin-top: 150px;\n  border: 1px solid #767b7d;\n  border-radius: 10px;\n  background: #d5dee1;\n  padding-top: 20px;\n  padding-bottom: 20px;\n}\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/login/login.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"login-area col-sm-6 col-sm-push-3\">\n  <div class=\"form-group\">\n    <label for=\"email\">Username:</label>\n    <input [(ngModel)]=\"username\" type=\"email\" class=\"form-control\" id=\"email\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"pwd\">Password:</label>\n    <input [(ngModel)]=\"password\" type=\"password\" class=\"form-control\" id=\"pwd\">\n  </div>\n  <button (click)=\"logIn()\" type=\"submit\" class=\"btn btn-default\">Submit</button>\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/login/login.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_service__ = __webpack_require__("../../../../../src/app/login.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var LoginComponent = (function () {
+    function LoginComponent(router, loginService) {
+        this.router = router;
+        this.loginService = loginService;
+        this.username = '';
+        this.password = '';
+    }
+    LoginComponent.prototype.ngOnInit = function () {
+    };
+    LoginComponent.prototype.logIn = function () {
+        var _this = this;
+        this.loginService.login({ username: this.username, password: this.password }).subscribe(function (res) {
+            console.log(res);
+            localStorage.setItem('token', res.token);
+            _this.router.navigate(['/']);
+        }, function (err) {
+            alert('ERROR ON LOGGIN IN!');
+        });
+    };
+    LoginComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-login',
+            template: __webpack_require__("../../../../../src/app/login/login.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/login/login.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */],
+            __WEBPACK_IMPORTED_MODULE_2__login_service__["a" /* LoginService */]])
+    ], LoginComponent);
+    return LoginComponent;
 }());
 
 
@@ -526,7 +711,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/message-add/message-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"col-sm-6 col-sm-push-3\">\n    <h2>Message# {{id}}</h2>\n    <div class=\"form-group\">\n      <h4>Message text</h4>\n      <input [(ngModel)]=\"message.message\" class=\"form-control\">\n    </div>\n    <div class=\"form-group\">\n      <h4>Description</h4>\n      <input [(ngModel)]=\"message.description\" class=\"form-control\">\n    </div>\n    <div class=\"form-group\">\n      <h4>next question ID</h4>\n      <input [(ngModel)]=\"message.next\">\n    </div>\n    <div class=\"form-group\">\n      <h4>next question or buttons</h4>\n      <select [(ngModel)]=\"message.type\">\n        <option value=\"0\">question</option>\n        <option value=\"1\">button</option>\n      </select>\n    </div>\n    <div class=\"form-group\">\n      <h4>user profile data</h4>\n      <select [(ngModel)]=\"message.db_key\">\n        <option value=''></option>\n        <option value='gender'>gender</option>\n        <option value='phone'>phone</option>\n        <option value='nrc'>NRC</option>\n        <option value='township'>township</option>\n        <option value='age'>Age</option>\n        <option value='salary'>salary</option>\n      </select>\n    </div>\n    <div class=\"form-group\">\n      <h4>Input:After this the flow will wait for users input</h4>\n      <input [(ngModel)]=\"message.input\" type=\"checkbox\">\n    </div>\n    <button (click)=\"addUpdateMessage()\" class=\"btn btn-default\">Submit</button>\n    <button class=\"btn btn-default\" [routerLink]=\"['/']\">Cancel</button>\n  </div>\n</div>\n\n"
+module.exports = "<div class=\"container\">\n  <div class=\"col-sm-6 col-sm-push-3\">\n    <h2>Message# {{id}}</h2>\n    <div class=\"form-group\">\n      <h4>Message text</h4>\n      <input [(ngModel)]=\"message.message\" class=\"form-control\">\n    </div>\n    <div class=\"form-group\">\n      <h4>Description</h4>\n      <input [(ngModel)]=\"message.description\" class=\"form-control\">\n    </div>\n    <div class=\"form-group\">\n      <h4>next question ID</h4>\n      <input [(ngModel)]=\"message.next\">\n    </div>\n    <div class=\"form-group\">\n      <h4>next question or buttons</h4>\n      <select [(ngModel)]=\"message.type\">\n        <option value=\"0\">question</option>\n        <option value=\"1\">button</option>\n      </select>\n    </div>\n    <div class=\"form-group\">\n      <h4>user profile data</h4>\n      <select [(ngModel)]=\"message.db_key\">\n        <option value=''></option>\n        <option value='gender'>gender</option>\n        <option value='phone'>phone</option>\n        <option value='nrc'>NRC</option>\n        <option value='township'>township</option>\n        <option value='age'>Age</option>\n        <option value='salary'>salary</option>\n        <option value='full_name'>Full Name</option>\n      </select>\n    </div>\n    <div class=\"form-group\">\n      <h4>Input:After this the flow will wait for users input</h4>\n      <input [(ngModel)]=\"message.input\" type=\"checkbox\">\n    </div>\n    <button (click)=\"addUpdateMessage()\" class=\"btn btn-default\">Submit</button>\n    <button class=\"btn btn-default\" [routerLink]=\"['/']\">Cancel</button>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -638,7 +823,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/messages-list/messages-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n  <div class=\"col-sm-12\">\n    <button  [routerLink]=\"['/mass']\" class=\"btn\">New Mass</button>\n    <button class=\"btn\">Reports</button>\n  </div>\n  <div class=\"col-sm-12\">\n    <h2>FLOW</h2>\n    <table *ngFor=\"let flow of allFlow\" class=\"table\">\n      <thead>\n      <tr>\n        <th>ID</th>\n        <th>message</th>\n        <th>description</th>\n        <th *ngIf=\"!flow.buttons_next_button\">Next message</th>\n        <th *ngFor=\"let b of flow.buttons_next_button; let i = index\">Button/next message</th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr>\n        <td class=\"list-id\">{{flow.id}}</td>\n        <td class=\"list-message\">{{flow.message}}</td>\n        <td class=\"list-description\">{{flow.description}}</td>\n        <td class=\"list-next\" *ngIf=\"!flow.buttons_next_button\">{{flow.message_next_id}}</td>\n        <td class=\"list-next\" *ngFor=\"let b of flow.buttons_next_button\">{{b.name}}/{{b.next}}</td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n\n  <h2>messages</h2>\n  <button [routerLink]=\"['/messages-add']\" class=\"btn\">Add message</button>\n  <table class=\"table\">\n    <thead>\n    <tr>\n      <th>ID</th>\n      <th>Message</th>\n      <th>Description</th>\n      <th></th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let message of allMessages\">\n      <td>{{message.id}}</td>\n      <td>{{message.message}}</td>\n      <td>{{message.description}}</td>\n      <td><i [routerLink]=\"['/messages-update/',message.id]\" class=\"fas fa-edit\"></i>\n        <i (click)=\"deleteMessage(message.id)\" class=\"fas fa-trash\"></i></td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n\n\n<div class=\"container\">\n  <h2>Buttons</h2>\n  <button class=\"btn\" [routerLink]=\"['/buttons-add']\">Add button</button>\n  <table class=\"table\">\n    <thead>\n    <tr>\n      <th>ID</th>\n      <th>Message</th>\n      <th>Buttons</th>\n      <th></th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let button of allButtons\">\n      <td>{{button.id}}</td>\n      <td>{{button.message}}</td>\n      <td><span style=\"border: 2px solid green; border-radius: 3px\" *ngFor=\"let b of button.buttons\"> {{b.name}} </span>\n      </td>\n      <td><i [routerLink]=\"['/buttons-update/',button.id]\" class=\"fas fa-edit\"></i>\n        <i (click)=\"geleteButton(button.id)\" class=\"fas fa-trash\"></i></td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n"
+module.exports = "<div class=\"container\">\n\n  <div class=\"col-sm-12\">\n    <button  [routerLink]=\"['/mass']\" class=\"btn\">New Mass</button>\n    <button class=\"btn\">Reports</button>\n  </div>\n  <div class=\"col-sm-12\">\n    <h2>FLOW</h2>\n    <table *ngFor=\"let flow of allFlow\" class=\"table\">\n      <thead>\n      <tr>\n        <th>ID</th>\n        <th>message</th>\n        <th>description</th>\n        <th *ngIf=\"!flow.buttons_next_button\">Next message</th>\n        <th *ngFor=\"let b of flow.buttons_next_button; let i = index\">Button/next message</th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr>\n        <td class=\"list-id\">{{flow.id}}</td>\n        <td class=\"list-message\">{{flow.message}}</td>\n        <td class=\"list-description\">{{flow.description}}</td>\n        <td class=\"list-next\" *ngIf=\"!flow.buttons_next_button\">{{flow.message_next_id}}</td>\n        <td class=\"list-next\" *ngFor=\"let b of flow.buttons_next_button\">{{b.name}}/{{b.next}}</td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n\n  <h2>messages</h2>\n  <button [routerLink]=\"['/messages-add']\" class=\"btn\">Add message</button>\n  <table class=\"table\">\n    <thead>\n    <tr>\n      <th>ID</th>\n      <th>Message</th>\n      <th>Description</th>\n      <th></th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let message of allMessages\">\n      <td>{{message.id}}</td>\n      <td>{{message.message}}</td>\n      <td>{{message.description}}</td>\n      <td><i [routerLink]=\"['/messages-update/',message.id]\" class=\"fas fa-edit\"></i>\n        <i (click)=\"deleteMessage(message.id)\" class=\"fas fa-trash\"></i></td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n\n\n<div class=\"container\">\n  <h2>Buttons</h2>\n  <button class=\"btn\" [routerLink]=\"['/buttons-add']\">Add button</button>\n  <table class=\"table\">\n    <thead>\n    <tr>\n      <th>ID</th>\n      <th>Message</th>\n      <th>Buttons</th>\n      <th>profile key</th>\n      <th></th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let button of allButtons\">\n      <td>{{button.id}}</td>\n      <td>{{button.message}}</td>\n      <td><span style=\"border: 2px solid green; border-radius: 3px\" *ngFor=\"let b of button.buttons\"> {{b.name}} </span>\n      </td>\n      <td><span style=\"border: 2px solid green; border-radius: 3px\"> {{button.db_key}} </span>\n      </td>\n      <td><i [routerLink]=\"['/buttons-update/',button.id]\" class=\"fas fa-edit\"></i>\n        <i (click)=\"geleteButton(button.id)\" class=\"fas fa-trash\"></i></td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n"
 
 /***/ }),
 
@@ -748,7 +933,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var MessagesService = (function () {
     function MessagesService(http) {
         this.http = http;
-        this.botUrl = 'http://localhost:3000';
+        this.botUrl = 'https://bot.good.com.mm';
     }
     MessagesService.prototype.getAllQuestions = function () {
         return this.http.get(this.botUrl + "/allMessages");
