@@ -94,12 +94,14 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__auth_guard__ = __webpack_require__("../../../../../src/app/auth.guard.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__login_service__ = __webpack_require__("../../../../../src/app/login.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__reporting_reporting_component__ = __webpack_require__("../../../../../src/app/reporting/reporting.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -128,7 +130,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_7__buttons_buttons_component__["a" /* ButtonsComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__buttons_add_buttons_add_component__["a" /* ButtonsAddComponent */],
                 __WEBPACK_IMPORTED_MODULE_12__mass_mass_component__["a" /* MassComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__login_login_component__["a" /* LoginComponent */]
+                __WEBPACK_IMPORTED_MODULE_13__login_login_component__["a" /* LoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_16__reporting_reporting_component__["a" /* ReportingComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -161,6 +164,8 @@ var AppModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mass_mass_component__ = __webpack_require__("../../../../../src/app/mass/mass.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__auth_guard__ = __webpack_require__("../../../../../src/app/auth.guard.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__reporting_reporting_component__ = __webpack_require__("../../../../../src/app/reporting/reporting.component.ts");
+
 
 
 
@@ -177,7 +182,8 @@ var router = [
     { path: 'buttons-update/:id', component: __WEBPACK_IMPORTED_MODULE_2__buttons_add_buttons_add_component__["a" /* ButtonsAddComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_6__auth_guard__["a" /* AuthGuard */]] },
     { path: 'buttons-add', component: __WEBPACK_IMPORTED_MODULE_2__buttons_add_buttons_add_component__["a" /* ButtonsAddComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_6__auth_guard__["a" /* AuthGuard */]] },
     { path: 'mass', component: __WEBPACK_IMPORTED_MODULE_5__mass_mass_component__["a" /* MassComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_6__auth_guard__["a" /* AuthGuard */]] },
-    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_7__login_login_component__["a" /* LoginComponent */] }
+    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_7__login_login_component__["a" /* LoginComponent */] },
+    { path: 'reporting', component: __WEBPACK_IMPORTED_MODULE_8__reporting_reporting_component__["a" /* ReportingComponent */] }
 ];
 var routes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["c" /* RouterModule */].forRoot(router);
 
@@ -823,7 +829,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/messages-list/messages-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n  <div class=\"col-sm-12\">\n    <button  [routerLink]=\"['/mass']\" class=\"btn\">New Mass</button>\n    <button class=\"btn\">Reports</button>\n  </div>\n  <div class=\"col-sm-12\">\n    <h2>FLOW</h2>\n    <table *ngFor=\"let flow of allFlow\" class=\"table\">\n      <thead>\n      <tr>\n        <th>ID</th>\n        <th>message</th>\n        <th>description</th>\n        <th *ngIf=\"!flow.buttons_next_button\">Next message</th>\n        <th *ngFor=\"let b of flow.buttons_next_button; let i = index\">Button/next message</th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr>\n        <td class=\"list-id\">{{flow.id}}</td>\n        <td class=\"list-message\">{{flow.message}}</td>\n        <td class=\"list-description\">{{flow.description}}</td>\n        <td class=\"list-next\" *ngIf=\"!flow.buttons_next_button\">{{flow.message_next_id}}</td>\n        <td class=\"list-next\" *ngFor=\"let b of flow.buttons_next_button\">{{b.name}}/{{b.next}}</td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n\n  <h2>messages</h2>\n  <button [routerLink]=\"['/messages-add']\" class=\"btn\">Add message</button>\n  <table class=\"table\">\n    <thead>\n    <tr>\n      <th>ID</th>\n      <th>Message</th>\n      <th>Description</th>\n      <th></th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let message of allMessages\">\n      <td>{{message.id}}</td>\n      <td>{{message.message}}</td>\n      <td>{{message.description}}</td>\n      <td><i [routerLink]=\"['/messages-update/',message.id]\" class=\"fas fa-edit\"></i>\n        <i (click)=\"deleteMessage(message.id)\" class=\"fas fa-trash\"></i></td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n\n\n<div class=\"container\">\n  <h2>Buttons</h2>\n  <button class=\"btn\" [routerLink]=\"['/buttons-add']\">Add button</button>\n  <table class=\"table\">\n    <thead>\n    <tr>\n      <th>ID</th>\n      <th>Message</th>\n      <th>Buttons</th>\n      <th>profile key</th>\n      <th></th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let button of allButtons\">\n      <td>{{button.id}}</td>\n      <td>{{button.message}}</td>\n      <td><span style=\"border: 2px solid green; border-radius: 3px\" *ngFor=\"let b of button.buttons\"> {{b.name}} </span>\n      </td>\n      <td><span style=\"border: 2px solid green; border-radius: 3px\"> {{button.db_key}} </span>\n      </td>\n      <td><i [routerLink]=\"['/buttons-update/',button.id]\" class=\"fas fa-edit\"></i>\n        <i (click)=\"geleteButton(button.id)\" class=\"fas fa-trash\"></i></td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n"
+module.exports = "<div class=\"container\">\n\n  <div class=\"col-sm-12\">\n    <button  [routerLink]=\"['/mass']\" class=\"btn\">New Mass</button>\n    <button [routerLink]=\"['/reporting']\" class=\"btn\">Reports</button>\n  </div>\n  <div class=\"col-sm-12\">\n    <h2>FLOW</h2>\n    <table *ngFor=\"let flow of allFlow\" class=\"table\">\n      <thead>\n      <tr>\n        <th>ID</th>\n        <th>message</th>\n        <th>description</th>\n        <th *ngIf=\"!flow.buttons_next_button\">Next message</th>\n        <th *ngFor=\"let b of flow.buttons_next_button; let i = index\">Button/next message</th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr>\n        <td class=\"list-id\">{{flow.id}}</td>\n        <td class=\"list-message\">{{flow.message}}</td>\n        <td class=\"list-description\">{{flow.description}}</td>\n        <td class=\"list-next\" *ngIf=\"!flow.buttons_next_button\">{{flow.message_next_id}}</td>\n        <td class=\"list-next\" *ngFor=\"let b of flow.buttons_next_button\">{{b.name}}/{{b.next}}</td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n\n  <h2>messages</h2>\n  <button [routerLink]=\"['/messages-add']\" class=\"btn\">Add message</button>\n  <table class=\"table\">\n    <thead>\n    <tr>\n      <th>ID</th>\n      <th>Message</th>\n      <th>Description</th>\n      <th></th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let message of allMessages\">\n      <td>{{message.id}}</td>\n      <td>{{message.message}}</td>\n      <td>{{message.description}}</td>\n      <td><i [routerLink]=\"['/messages-update/',message.id]\" class=\"fas fa-edit\"></i>\n        <i (click)=\"deleteMessage(message.id)\" class=\"fas fa-trash\"></i></td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n\n\n<div class=\"container\">\n  <h2>Buttons</h2>\n  <button class=\"btn\" [routerLink]=\"['/buttons-add']\">Add button</button>\n  <table class=\"table\">\n    <thead>\n    <tr>\n      <th>ID</th>\n      <th>Message</th>\n      <th>Buttons</th>\n      <th>profile key</th>\n      <th></th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr *ngFor=\"let button of allButtons\">\n      <td>{{button.id}}</td>\n      <td>{{button.message}}</td>\n      <td><span style=\"border: 2px solid green; border-radius: 3px\" *ngFor=\"let b of button.buttons\"> {{b.name}} </span>\n      </td>\n      <td><span style=\"border: 2px solid green; border-radius: 3px\"> {{button.db_key}} </span>\n      </td>\n      <td><i [routerLink]=\"['/buttons-update/',button.id]\" class=\"fas fa-edit\"></i>\n        <i (click)=\"geleteButton(button.id)\" class=\"fas fa-trash\"></i></td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n"
 
 /***/ }),
 
@@ -956,11 +962,102 @@ var MessagesService = (function () {
     MessagesService.prototype.sendMass = function (data) {
         return this.http.post(this.botUrl + "/sendMass", data);
     };
+    MessagesService.prototype.getReportsTotal = function () {
+        return this.http.get(this.botUrl + "/getUsersCount");
+    };
+    MessagesService.prototype.getAllReports = function () {
+        return this.http.get(this.botUrl + "/allReports");
+    };
     MessagesService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
     ], MessagesService);
     return MessagesService;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/reporting/reporting.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/reporting/reporting.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n  <h2>Reporting</h2>\n  <div>total Mails: {{total[0].c}}</div>\n  <div>total Females: {{total[1].c}}</div>\n  <button class=\"btn\" [routerLink]=\"['/']\">Home</button>\n  <table class=\"table\">\n    <thead>\n    <tr>\n      <th></th>\n      <th>CreatedAt</th>\n      <th>step 1</th>\n      <th>step 2</th>\n      <th>step 3</th>\n      <th>step 4</th>\n      <th>step 5</th>\n      <th>step 6</th>\n      <th>step 7</th>\n      <th>step 8</th>\n      <th>step 9</th>\n      <th>step 10</th>\n      <th>step 11</th>\n      <th>step 12</th>\n      <th>step 13</th>\n      <th>step 14</th>\n      <th>step 15</th>\n      <th>step 16</th>\n      <th>step 17</th>\n      <th>step 18</th>\n      <th>step 19</th>\n      <th>step 20</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr></tr>\n    <tr *ngFor=\"let data of reports\">\n      <th>\n        <div>Total/Female</div>\n      </th>\n      <td>{{data.createdAt}}</td>\n      <td>{{getNumberForStep(data.id, '1')}}</td>\n      <td>{{getNumberForStep(data.id, '2')}}</td>\n      <td>{{getNumberForStep(data.id, '3')}}</td>\n      <td>{{getNumberForStep(data.id, '4')}}</td>\n      <td>{{getNumberForStep(data.id, '5')}}</td>\n      <td>{{getNumberForStep(data.id, '6')}}</td>\n      <td>{{getNumberForStep(data.id, '7')}}</td>\n      <td>{{getNumberForStep(data.id, '8')}}</td>\n      <td>{{getNumberForStep(data.id, '9')}}</td>\n      <td>{{getNumberForStep(data.id, '10')}}</td>\n      <td>{{getNumberForStep(data.id, '11')}}</td>\n      <td>{{getNumberForStep(data.id, '12')}}</td>\n      <td>{{getNumberForStep(data.id, '13')}}</td>\n      <td>{{getNumberForStep(data.id, '14')}}</td>\n      <td>{{getNumberForStep(data.id, '15')}}</td>\n      <td>{{getNumberForStep(data.id, '16')}}</td>\n      <td>{{getNumberForStep(data.id, '17')}}</td>\n      <td>{{getNumberForStep(data.id, '18')}}</td>\n      <td>{{getNumberForStep(data.id, '19')}}</td>\n      <td>{{getNumberForStep(data.id, '20')}}</td>\n    </tr>\n    </tbody>\n  </table>\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/reporting/reporting.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReportingComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__messages_service__ = __webpack_require__("../../../../../src/app/messages.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ReportingComponent = (function () {
+    function ReportingComponent(messagesSerive) {
+        this.messagesSerive = messagesSerive;
+        this.total = [];
+        this.reports = [];
+    }
+    ReportingComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.messagesSerive.getReportsTotal().subscribe(function (data) {
+            _this.total = data;
+        });
+        this.messagesSerive.getAllReports().subscribe(function (data) {
+            _this.reports = data;
+        });
+    };
+    ReportingComponent.prototype.getNumberForStep = function (id, step) {
+        step = Number(step);
+        var num = this.reports.filter(function (o) {
+            return o.id === id;
+        })[0]
+            .data
+            .filter(function (n) {
+            return n.step === step;
+        })[0];
+        console.log(num);
+        return num.count + '/' + num.f;
+    };
+    ReportingComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-reporting',
+            template: __webpack_require__("../../../../../src/app/reporting/reporting.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/reporting/reporting.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__messages_service__["a" /* MessagesService */]])
+    ], ReportingComponent);
+    return ReportingComponent;
 }());
 
 
